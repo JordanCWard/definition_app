@@ -14,9 +14,8 @@ def home():
 @app.route("/api/v1/<word>")
 def about(word):
     uppercase = word.upper()
-    temperature = 23
-    return {"definition": uppercase,
-            "word": word}
+    result = {"definition": uppercase, "word": word}
+    return result
 
 
 # Only runs the website if this script is run directly from this file
