@@ -1,8 +1,10 @@
 # Import flask to use multiple HTML web pages
 from flask import Flask, render_template
+import pandas as pd
 
 app = Flask(__name__)
 
+df = pd.read_csv("dictionary.csv")
 
 # the next line is connected to home function because of the @ symbol
 @app.route("/")
@@ -13,9 +15,12 @@ def home():
 # Special syntax around station and date
 @app.route("/api/v1/<word>")
 def about(word):
-    uppercase = word.upper()
-    result = {"definition": uppercase, "word": word}
-    return result
+    # Extract definition from the word
+    # Squeeze converts definition to string
+    # df.loc useful for accessing specific rows or columns
+    definition = df.loc[df["word"] == word]['definition'].squeeze()
+    result_dictionary = {'word': word, 'definition': definition}
+    return result_dictionary
 
 
 # Only runs the website if this script is run directly from this file
