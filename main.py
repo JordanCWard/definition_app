@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 df = pd.read_csv("dictionary.csv")
 
+
 # the next line is connected to home function because of the @ symbol
 @app.route("/")
 def home():
